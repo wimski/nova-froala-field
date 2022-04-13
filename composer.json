@@ -1,5 +1,5 @@
 {
-    "name": "froala/nova-froala-field",
+    "name": "wimski/nova-froala-field",
     "description": "A Laravel Nova Froala WYSIWYG Editor Field.",
     "keywords": [
         "laravel",
@@ -9,15 +9,8 @@
         "froala",
         "editor"
     ],
-    "homepage": "https://github.com/froala/nova-froala-field",
+    "homepage": "https://github.com/wimski/nova-froala-field",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Slava Razum",
-            "email": "modern.web.artisan@gmail.com",
-            "role": "Developer"
-        }
-    ],
     "repositories": [
         {
             "type": "composer",
@@ -25,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.3",
+        "php": "^7.4",
         "laravel/nova": "*",
         "league/flysystem": "^1.0.8",
         "spatie/image-optimizer": "^1.1"
