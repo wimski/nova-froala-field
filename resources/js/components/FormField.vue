@@ -33,7 +33,12 @@ export default {
             });
         }
 
-        new PluginsLoader(this.options, this.$toasted).registerPlugins().then(data => {
+        const pluginLoader = new PluginsLoader(this.options, this.$toasted);
+
+        Promise.all([
+            pluginLoader.registerPlugins(),
+            pluginLoader.registerCustomElements(),
+        ]).then((data) => {
             this.loading = false;
         });
     },
