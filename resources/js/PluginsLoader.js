@@ -1,3 +1,6 @@
+import FroalaEditor from 'froala-editor';
+import axios from 'axios';
+
 class PluginsLoader {
     constructor(options, notificator) {
         this.options = options;
@@ -47,6 +50,25 @@ class PluginsLoader {
         return true;
     }
 
+    async registerCustomElements() {
+        if (! this.options.custom_elements) {
+            return true;
+        }
+
+        return await Promise.all(this.options.custom_elements.map(path => {
+            return new Promise(async(resolve) => {
+                try {
+                    const url  = window.location.origin + '/' + path.replace(/^\//, '');
+                    const data = await axios.get(url);
+
+                    resolve(eval(`const c = ${data.data};c;`)(FroalaEditor));
+                } catch (e) {
+                    this.errorCustomElementNotification(path);
+                }
+            });
+        }));
+    }
+
     getRequestedButtons() {
         const props = [
             'toolbarButtons',
@@ -67,6 +89,13 @@ class PluginsLoader {
     errorPluginLoadNotification(name) {
         this.notificator.show(
             `Something wrong with ${name} plugin load. ` + 'Perhaps you forgot to publish it.',
+            { type: 'error' }
+        );
+    }
+
+    errorCustomElementNotification(path) {
+        this.notificator.show(
+            `Something went wrong while loading the following custom element script file: ${path}`,
             { type: 'error' }
         );
     }
