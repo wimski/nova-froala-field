@@ -20,7 +20,6 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "laravel/nova": "*",
-        "league/flysystem": "^1.0.8",
         "spatie/image-optimizer": "^1.1"
     },
     "require-dev": {
